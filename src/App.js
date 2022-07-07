@@ -9,6 +9,7 @@ import Contect from "./container/contect/Contect";
 import Auth from "./container/auth/Auth";
 import Medicine from "./container/medicine/Medicine";
 import BookAppointemnt from "./container/appointment/BookAppointemnt";
+import ListAppointment from "./container/appointment/ListAppointment";
 
 
 
@@ -26,6 +27,7 @@ function App() {
       <Route path={'/Auth'} exact component={Auth}></Route>
       <Route path={'/Medicine'} exact component={Medicine}></Route>
       <Route path={'/BookApponitment'} exact component={BookAppointemnt}></Route> 
+      <Route path={'/ListApponitment'} exact component={ListAppointment}></Route> 
       {/* <Route path={'/Refexample'} exact component={Refexample}></Route> */}
     </Switch>
     <Footer/>
