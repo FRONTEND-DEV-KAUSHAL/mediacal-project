@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import * as yup from 'yup';
 import {useFormik ,Form ,Formik} from "formik";
 import {NavLink, useHistory} from 'react-router-dom';
+
  
 function BookAppointment(props) {
-    const history = useHistory();
- 
     let schema = yup.object().shape({
         name: yup.string().required("Enter your name"),
         email: yup.string().email("Enter valid email").required("Enter your email"),
@@ -54,6 +53,7 @@ function BookAppointment(props) {
       });
  
       const {handleChange ,errors ,handleSubmit ,handleBlur ,touched} = formikObj
+      
     return (
         <section id="appointment" className="appointment">
             <div className="container">
@@ -133,4 +133,3 @@ function BookAppointment(props) {
 }
  
 export default BookAppointment;
-
