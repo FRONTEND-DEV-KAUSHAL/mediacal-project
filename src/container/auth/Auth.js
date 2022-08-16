@@ -29,6 +29,9 @@ function Auth(props) {
             password: ''
         }
     }
+    const handleLogin = () => {
+        localStorage.setItem("user","123")
+    }
     let data = [];
     let schema = yup.object().shape(setschema);
     const getdata = (values) => {
@@ -49,7 +52,11 @@ function Auth(props) {
         validationSchema: schema,
         enableReinitialize: true,
         onSubmit: values => {
-            getdata(values);
+            if (usertype === "login") {
+                handleLogin();
+            } else {
+                getdata(values);
+            }
             localStorage.setItem("user", JSON.stringify(values))
         },
     });
