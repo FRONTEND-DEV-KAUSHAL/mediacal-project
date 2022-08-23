@@ -15,29 +15,33 @@ import Auth from './container/auth/Auth'
 import PublicRoute from './route/PublicRoute';
 import PrivetRoute from './route/PrivetRoute';
 import ToggleContext from './context/Themecontext';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
 function App() {
   return (
-    <div className="App">
-      <ToggleContext>
+    // <div className="App">
+      <Provider store={store}>
+        <ToggleContext>
 
-        <Header />
-        <Switch>
-          <PublicRoute path={"/"} exact component={Home} />
-          <PublicRoute path={"/Department"} exact component={Department} />
-          <PublicRoute path={"/Doctor"} exact component={Doctor} />
-          <PublicRoute path={"/About"} exact component={About} />
-          <PublicRoute path={"/Contact"} exact component={Contact} />
-          <PublicRoute path={"/Medicine"} exact component={Medicine} />
-          <PrivetRoute path={"/book_apt"} exact component={BookAppointment} />
-          <PrivetRoute path={"/list_apt"} exact component={ListAppointment} />
-          <PublicRoute path={"/Auth"} exact restricted={true} component={Auth} />
-          {/* <Route path={"/Form"} exact component={Form}></Route> */}
+          <Header />
+          <Switch>
+            <PublicRoute path={"/"} exact component={Home} />
+            <PublicRoute path={"/Department"} exact component={Department} />
+            <PublicRoute path={"/Doctor"} exact component={Doctor} />
+            <PublicRoute path={"/About"} exact component={About} />
+            <PublicRoute path={"/Contact"} exact component={Contact} />
+            <PublicRoute path={"/Medicine"} exact component={Medicine} />
+            <PrivetRoute path={"/book_apt"} exact component={BookAppointment} />
+            <PrivetRoute path={"/list_apt"} exact component={ListAppointment} />
+            <PublicRoute path={"/Auth"} exact restricted={true} component={Auth} />
+            {/* <Route path={"/Form"} exact component={Form}></Route> */}
 
-        </Switch>
-        <Footer />
-      </ToggleContext>
-    </div>
+          </Switch>
+          <Footer />
+        </ToggleContext>
+      </Provider>
+    // </div>
   );
 }
 

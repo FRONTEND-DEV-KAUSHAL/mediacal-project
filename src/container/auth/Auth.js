@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import * as yup from 'yup'
 import { useFormik, Form, Formik } from 'formik'
+import { SIGN_UP_ACTION } from '../../redux/ActionTypes';
+import { signUpAction } from '../../redux/action/Auth.action';
+import { useDispatch } from 'react-redux';
 
 function Auth(props) {
     let [usertype, setUsertype] = useState('login');
@@ -47,6 +50,7 @@ function Auth(props) {
         }
 
     }
+    const dispatch = useDispatch() 
     const formik = useFormik({
         initialValues: setInit,
         validationSchema: schema,
@@ -57,7 +61,8 @@ function Auth(props) {
             } else {
                 getdata(values);
             }
-            localStorage.setItem("user", JSON.stringify(values))
+            dispatch(signUpAction(values))
+            // localStorage.setItem("user", JSON.stringify(values))
         },
     });
 

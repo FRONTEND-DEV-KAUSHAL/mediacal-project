@@ -1,5 +1,5 @@
-import { call, takeEvery, put, all } from 'saga/effects'
-import { Signupapi } from '../common/api/Auth.api';
+import { call, takeEvery, put, all } from 'redux-saga/effects'
+import { Signupapi } from '../../common/api/Auth.api';
 
 function* SignUp(action) {
    try {
@@ -16,6 +16,6 @@ function* watchSignUp() {
 
 export function* signUpSaga() {
     yield all([
-        watchSignUp
+        watchSignUp()
     ])
 }
