@@ -1,5 +1,6 @@
 import { call, takeEvery, put, all } from 'redux-saga/effects'
 import { Signupapi } from '../../common/api/Auth.api';
+import * as ActionTypes from '../ActionTypes';
 
 function* SignUp(action) {
    try {
@@ -11,7 +12,7 @@ function* SignUp(action) {
 }
 
 function* watchSignUp() {
-  yield takeEvery(ActionType.SIGN_UP, SignUp);
+  yield takeEvery(ActionTypes.SIGN_UP_ACTION, SignUp);
 }
 
 export function* signUpSaga() {

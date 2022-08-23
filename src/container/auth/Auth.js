@@ -39,8 +39,6 @@ function Auth(props) {
     let schema = yup.object().shape(setschema);
     const getdata = (values) => {
 
-
-        console.log(values);
         let localdata = JSON.parse(localStorage.getItem("user"));
         if (localdata === null) {
             localStorage.setItem("user", JSON.stringify([values]))
