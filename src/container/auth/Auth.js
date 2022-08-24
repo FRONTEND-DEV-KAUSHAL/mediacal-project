@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as yup from 'yup'
 import { useFormik, Form, Formik } from 'formik'
 import { SIGN_UP_ACTION } from '../../redux/ActionTypes';
-import { signUpAction } from '../../redux/action/Auth.action';
+import { signInAction, signUpAction } from '../../redux/action/Auth.action';
 import { useDispatch } from 'react-redux';
 
 function Auth(props) {
@@ -34,6 +34,7 @@ function Auth(props) {
     }
     const handleLogin = () => {
         localStorage.setItem("user","123")
+
     }
     let data = [];
     let schema = yup.object().shape(setschema);
@@ -60,6 +61,8 @@ function Auth(props) {
                 getdata(values);
             }
             dispatch(signUpAction(values))
+            dispatch(signInAction(values))
+
             // localStorage.setItem("user", JSON.stringify(values))
         },
     });
