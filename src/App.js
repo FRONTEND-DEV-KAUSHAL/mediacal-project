@@ -17,10 +17,12 @@ import PrivetRoute from './route/PrivetRoute';
 import ToggleContext from './context/Themecontext';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
+import { SnackbarProvider } from 'notistack';
 
 function App() {
   return (
     // <div className="App">
+    <SnackbarProvider maxSnack={3}>
       <Provider store={store}>
         <ToggleContext>
 
@@ -41,6 +43,7 @@ function App() {
           <Footer />
         </ToggleContext>
       </Provider>
+      </SnackbarProvider>
     // </div>
   );
 }
