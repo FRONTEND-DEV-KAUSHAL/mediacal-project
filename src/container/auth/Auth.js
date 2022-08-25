@@ -138,12 +138,12 @@ function Auth(props) {
                         <div className="text-center">
                             {
                                 reset === true ?
-                                    <button type="submit">Submit</button>
+                                    <button type="Submit">Submit</button>
                                     :
                                     usertype === 'login' ?
-                                        <button type="submit">Login</button>
+                                        <button type="Submit">Login</button>
                                         :
-                                        <button type="submit">Signup</button>
+                                        <button type="Submit">Signup</button>
                             }
                         </div>
                     </Form>
