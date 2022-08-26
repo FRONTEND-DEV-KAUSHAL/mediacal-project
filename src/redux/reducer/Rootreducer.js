@@ -5,5 +5,5 @@ import { signupReducer } from "./Signup.reducer";
 
 export const rootreducer = combineReducers({
     Auth: signupReducer,
-    Alert: alertReducer,
+    Alert: alertReducer
 })

@@ -4,13 +4,14 @@ import { setAlert } from '../action/Alert.action';
 import * as ActionTypes from '../ActionTypes';
 
 function* SignUp(action) {
-   try {
-      const user = yield call(Signupapi, action.payload);
-      console.log(user);
-    //   yield put({type: "USER_FETCH_SUCCEEDED", user: user});
-   } catch (e) {
-    //   yield put({type: "USER_FETCH_FAILED", message: e.message});
-   }
+  try {
+    const user = yield call(Signupapi, action.payload);
+    yield put(setAlert({ text: user.payload, color: 'success' }))
+    console.log(user);
+  } catch (e) {
+    yield put(setAlert({ text: e.payload, color: 'error' }))
+
+  }
 }
 
 function* watchSignUp() {
@@ -19,13 +20,11 @@ function* watchSignUp() {
 
 function* SignIn(action) {
   try {
-     const user = yield call(Signinapi, action.payload);
-     console.log(user);
-     yield put(setAlert({text:user.text, color:'sucess'}))
-   //   yield put({type: "USER_FETCH_SUCCEEDED", user: user});
+    const user = yield call(Signinapi, action.payload);
+    console.log(user);
+    yield put(setAlert({ text: user.payload, color: 'success' }))
   } catch (e) {
-    yield put(setAlert({text:user.text, color:'sucess'}))
-   //   yield put({type: "USER_FETCH_FAILED", message: e.message});
+    yield put(setAlert({ text: e.payload, color: 'error' }))
   }
 }
 
@@ -35,8 +34,8 @@ function* watchSignIn() {
 
 
 export function* signUpSaga() {
-    yield all([
-        watchSignUp(),
-        watchSignIn()
-    ])
+  yield all([
+    watchSignUp(),
+    watchSignIn()
+  ])
 }

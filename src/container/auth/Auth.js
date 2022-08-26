@@ -33,7 +33,7 @@ function Auth(props) {
         }
     }
     const handleLogin = () => {
-        localStorage.setItem("user","123")
+        //localStorage.setItem("user","123")
 
     }
     let data = [];
@@ -56,12 +56,12 @@ function Auth(props) {
         enableReinitialize: true,
         onSubmit: values => {
             if (usertype === "login") {
-                handleLogin();
+                dispatch(signInAction(values))
             } else {
-                getdata(values);
+                dispatch(signUpAction(values))
             }
-            dispatch(signUpAction(values))
-            dispatch(signInAction(values))
+            
+            
 
             // localStorage.setItem("user", JSON.stringify(values))
         },
