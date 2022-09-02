@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Fierbase";
 
 export const Signupapi = (data) => {
@@ -54,4 +54,21 @@ export const Signinapi = (data) => {
             });
     })
 
+}
+
+export const forgotapi = (data) => {
+    return new Promise((resolve, reject) => {
+        sendPasswordResetEmail(auth, data.email)
+            .then(() => {
+                resolve({ payload: "Please check your email." })
+                console.log("check your mali");
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // reject({ payload: errorCode })
+                    reject({ payload:" something went wrong "  });
+
+            });
+    })
 }
