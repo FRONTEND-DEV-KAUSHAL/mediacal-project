@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as yup from 'yup'
 import { useFormik, Form, Formik } from 'formik'
 import { SIGN_UP_ACTION } from '../../redux/ActionTypes';
-import { signInAction, signUpAction } from '../../redux/action/Auth.action';
+import { forgotAction, signInAction, signUpAction } from '../../redux/action/Auth.action';
 import { useDispatch } from 'react-redux';
 
 function Auth(props) {
@@ -55,12 +55,15 @@ function Auth(props) {
         validationSchema: schema,
         enableReinitialize: true,
         onSubmit: values => {
-            if (usertype === "login") {
+            if (usertype === "login" && reset === false) {
                 dispatch(signInAction(values))
-            } else {
+            } else if (usertype === "signup" && reset === false) {
                 dispatch(signUpAction(values))
+            } else if (reset === true) {
+                console.log(reset);
+                dispatch(forgotAction(values))
             }
-            
+
             
 
             // localStorage.setItem("user", JSON.stringify(values))
@@ -85,25 +88,24 @@ function Auth(props) {
                 <Formik values={formik}>
                     <Form onSubmit={handleSubmit} className="php-email-form">
                         <div>
-                            {
-                                reset === true ?
-                                    null
-                                    :
-                                    usertype === 'login' ?
-                                        null
-                                        :
+                        {
+                                    reset === 'true' ?
                                         <div className="col-md-4 form-group mt-3 mt-md-0">
-                                            <input type="text" className="form-control" name="name" id="name" placeholder="Your name" data-rule="email" data-msg="Please enter a valid email" onChange={handleChange} onBlur={handleBlur} />
-                                            <div className="validate" />
-                                            <p>{errors.name && touched.name ? errors.name : ''}</p>
+                                            <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" onChange={handleChange} onBlur={handleBlur} />
+                                            <p>{errors.email && touched.email ? errors.email : ''}</p>
                                         </div>
-                            }
-                            <div className="col-md-4 form-group mt-3 mt-md-0">
-                                <input type="text" className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" onChange={handleChange} onBlur={handleBlur} />
-                                <div className="validate" />
-                                <p>{errors.email && touched.email ? errors.email : ''}</p>
-                            </div>
-
+                                        :
+                                        usertype === 'login' ?
+                                            <div className="col-md-4 form-group mt-3 mt-md-0">
+                                                <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" onChange={handleChange} onBlur={handleBlur} />
+                                                <p>{errors.email && touched.email ? errors.email : ''}</p>
+                                            </div>
+                                            :
+                                            <div className="col-md-4 form-group mt-3 mt-md-0">
+                                                <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" onChange={handleChange} onBlur={handleBlur} />
+                                                <p>{errors.email && touched.email ? errors.email : ''}</p>
+                                            </div>
+                                }
                         </div>
                         <div>
                             {
@@ -113,7 +115,7 @@ function Auth(props) {
                                     <div className="col-md-4 form-group mt-3 mt-md-0">
                                         <input type="password" className="form-control" name="password" id="password" placeholder="Your password" data-rule="password" data-msg="Please enter a valid password" onChange={handleChange} onBlur={handleBlur} />
                                         <div className="validate" />
-                                        <p>{errors.password && touched.password ? errors.password : ''}</p>
+                                        <p style={{color: 'red'}}>{errors.password && touched.password ? errors.password : ''}</p>
                                     </div>
                             }
                         </div>
@@ -127,11 +129,11 @@ function Auth(props) {
                                     usertype === 'login' ?
                                         <>
                                             <p className='d-inline-block'>New User? Create An Account</p><button className='ms-3' onClick={() => setUsertype('signup')}>Signup</button>
-                                            <button className='ms-3' onClick={() => setReset(true)}>Forget Password ?</button>
+                                            <button className='ms-3' onClick={() => {setReset(true); console.log("hiudshv", );}}>Forget Password ?</button>
                                         </>
                                         :
                                         <>
-                                            <p className='d-inline-block'>Already Have An Account</p><button onClick={() => { setReset(false); setUsertype('login') }}>Login</button>
+                                            <p className='d-inline-block'>Already Have An Account</p><button onClick={() => { setReset(false); setUsertype('login');}}>Login</button>
                                         </>
                             }
                         </div>

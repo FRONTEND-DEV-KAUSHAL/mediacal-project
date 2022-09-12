@@ -1,11 +1,11 @@
 import { call, takeEvery, put, all } from 'redux-saga/effects'
-import { forgotapi, Signinapi, Signupapi } from '../../common/api/Auth.api';
+import { forgotApi, signInApi, signOutApi, signUpApi } from '../../common/api/Auth.api';
 import { setAlert } from '../action/Alert.action';
 import * as ActionTypes from '../ActionTypes';
 
 function* SignUp(action) {
   try {
-    const user = yield call(Signupapi, action.payload);
+    const user = yield call(signUpApi, action.payload);
     yield put(setAlert({ text: user.payload, color: 'success' }))
     console.log(user);
   } catch (e) {
@@ -22,7 +22,7 @@ function* watchSignUp() {
 
 function* SignIn(action) {
   try {
-    const user = yield call(Signinapi, action.payload);
+    const user = yield call(signInApi, action.payload);
     console.log(user);
     history.push("/")
     yield put(setAlert({ text: "Login succsesfully", color: 'success' }))
@@ -33,7 +33,7 @@ function* SignIn(action) {
 
 function* forgot(action){
   try {
-      const user = yield call(forgotapi, action.payload);
+      const user = yield call(forgotApi, action.payload);
       yield put(setAlert({ text: user.payload, color: "success" }))
       console.log(user);
       yield put(signedInAction(user))
